@@ -1,0 +1,14 @@
+baidu:
+    program: 0
+    args: 
+        url: https://www.baidu.com
+
+editor: &editor
+    program: 1
+    args:
+        url: /Applications/TextEdit.app
+        
+text editor: *editor
+
+music:
+    program: 2
