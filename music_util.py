@@ -10,6 +10,7 @@ import requests
 import re
 import youtube_dl
 import os.path
+import urllib
 
 AUDIO_PATH = '/Users/lhy/Downloads/musics'
 
@@ -29,13 +30,13 @@ class youtube(music):
         music.__init__(self)
         self.base_url = 'https://www.youtube.com/results?search_query={}'
         
-    def get_audio(self, search_text):
-        fname = '{}/{}.{}'.format(AUDIO_PATH, search_text, self.ext)
+    def get_audio(self, search_text, encode=False):
+        fname = urllib.parse.quote('{}/{}.{}'.format(AUDIO_PATH, search_text, self.ext))
         if os.path.isfile(fname):
             return 'file://' + fname
         url = self.base_url.format(search_text)
         html = self.get_html(url)
-        return 'file://' + self.download_audio(self.get_url(html), search_text)
+        return 'file://' + urllib.parse.quote(self.download_audio(self.get_url(html), search_text))
         
     
     def get_html(self, url):

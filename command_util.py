@@ -10,13 +10,19 @@ import yaml
 import webbrowser
 import sound_util
 import subprocess 
-import music_util 
+import music_util
+import urllib
+
+_lang_map = {
+        'english': 'en-US',
+        'chinese': 'zh-CN',
+        }
    
-def go_to_url(url='https://www.google.com/search?q=', search_args=''):
+def go_to_url(url='https://www.google.com/search?q=', search_args='', encode=False):
     #os.environ["BROSWER"] = r"/Applications/Google Chrome.app"
     if search_args:
+        if encode: search_args = urllib.parse.quote(search_args)
         url += '/search?q=' + '+'.join(search_args.split())
-        print(url)
     webbrowser.open(url)
 
 def open_app(url):
@@ -25,9 +31,11 @@ def open_app(url):
     )
     
 def play_music():
-    text = sound_util.audio2text("爸爸要听什么歌？")
+    text = sound_util.audio2text("爸爸要听英文歌还是中文歌？")
+    language = _lang_map.get(text) if text in _lang_map else None
+    text = sound_util.audio2text("爸爸要听什么歌？", language=language)
     url = music_util.youtube().get_audio(text.lower())
-    go_to_url(url=url)
+    go_to_url(url=url, encode=(language != 'en-US'))
    
 _dispatch = {
     0 : go_to_url, # '0' means directly search on google / or go the the URL

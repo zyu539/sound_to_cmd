@@ -1,4 +1,4 @@
-baidu:
+baidu: &baidu
     program: 0
     args: 
         url: https://www.baidu.com
