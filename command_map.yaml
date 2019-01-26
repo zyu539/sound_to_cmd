@@ -12,3 +12,27 @@ text editor: *editor
 
 music:
     program: 2
+
+python editor: &python-editor
+    program: 1
+    args:
+        url: /Applications/Anaconda-Navigator.app
+        
+python: *python-editor
+
+anaconda: *python-editor
+
+calculator: &calculator
+    program: 1
+    args:
+        url: /Applications/Calculator.app
+        
+skype: &calculator
+    program: 1
+    args:
+        url: /Applications/Skype.app
+        
+safari: &calculator
+    program: 1
+    args:
+        url: /Applications/Safari.app
