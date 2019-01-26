@@ -22,7 +22,7 @@ def go_to_url(url='https://www.google.com/search?q=', search_args='', encode=Fal
     #os.environ["BROSWER"] = r"/Applications/Google Chrome.app"
     if search_args:
         if encode: search_args = urllib.parse.quote(search_args)
-        url += '/search?q=' + '+'.join(search_args.split())
+        url += '+'.join(search_args.split())
     webbrowser.open(url)
 
 def open_app(url):
@@ -55,8 +55,3 @@ def text2command(cmd):
         else:
             go_to_url(search_args=str(cmd))
     f.close()
-    
-    
-if __name__ == '__main__':
-    text = sound_util.audio2text("Say Something:")
-    text2command(text)
